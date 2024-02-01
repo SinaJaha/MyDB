@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Create item{% endblock %}
+
+
+{% block content %}
+<h1>Create page</h1>
+<form method="post" action="/create/">
+    {% csrf_token %}
+    {{form.as_ul}}
+    <button type="submit" name="save">Create new</button>
+</form>
+{% endblock %}
