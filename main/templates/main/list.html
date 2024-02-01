@@ -1,26 +1,31 @@
 {% extends 'main/base.html' %}
 
 {% block title %}View List{% endblock %}
-
+{% block header %} {{ls.name}} {% endblock %}
 
 {% block content %}
 
-<h1>{{ls.name}}</h1>
 <form method="POST" action="#">
     {% csrf_token %}
-    <ul>
-        {% for item in ls.item_set.all %}
+    
+    {% for item in ls.item_set.all %}
+    <div class="input-group mb-3">
+        <div class="input-group-text">
             {% if item.complete %}
-                <li><input type="checkbox", value="clicked", name="c{{item.id}}" checked><del>{{item.text}}</del></li>
+                <input class="form-check-input mt-0" type="checkbox", value="clicked", name="c{{item.id}}" checked>
             {% else %}
-            <li><input type="checkbox", value="clicked", name="c{{item.id}}">{{item.text}}</li>
+                <input class="form-check-input mt-0" type="checkbox", value="clicked", name="c{{item.id}}">
             {% endif %} 
-        {% endfor %}
-    </ul>
+        </div>
+    <input type="text" value="{{item.text}}" class="form-control">
+    </div>
+    {% endfor %}
 
-    <button type="submit" name="save" value="save">Save</button>
-    <input type="text" name="newItemText" placeholder="New Item" />
-    <button type="submit" name="newItem" value="newItem">New Item</button>
+    <div class="input-group input-group-lg mb-3">
+    <input type="text" name="newItemText" placeholder="New Item" class="input-group-text" />
+    <button type="submit" name="newItem" value="newItem" class="btn btn-secondary">New Item</button>
+    </div>
+    <button type="submit" name="save" value="save" class="btn btn-primary">Save</button>
 </form>
 
 

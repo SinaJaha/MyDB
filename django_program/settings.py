@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms' , # legge til crispy_forms
+    'crispy_bootstrap5', # legge til bootstrap5
     'main.apps.MainConfig', # legge til min app
+    'reguser.apps.ReguserConfig', # legge til min app
 ]
 
 MIDDLEWARE = [
@@ -118,7 +121,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# legge til crispy_forms
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

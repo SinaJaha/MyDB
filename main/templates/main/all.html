@@ -1,15 +1,16 @@
 {% extends 'main/base.html' %}
 
 {% block title %}All List{% endblock %}
+{% block header %}All List{% endblock %}
 
 
 {% block content %}
 
-<h1>All Lists</h1>
-
 <ul>
     {% for ls in lists %}
-        <li><a href="/{{ls.id}}">{{ls.name}}</a></li>
+    <div class="input-group mb-3">
+        <a href="/{{ls.id}}" class="link-dark link-underline-opacity-10 link-underline-opacity-100-hover">{{ls.name}}</a>
+    </div>
     {% endfor %}
 
 

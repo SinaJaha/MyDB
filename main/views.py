@@ -5,6 +5,7 @@ from .forms import CreateNewList
 
 
 
+
 def index(response, id):
     try: 
         ls = ToDoList.objects.get(id=id)
@@ -49,7 +50,14 @@ def create(response):
         
     return render(response, "main/create.html", {"form":form})
 
+
+
     
 def showAll(response):
+    
     return render(response, "main/all.html", {"lists": ToDoList.objects.all()})
+
+
+
+
 
