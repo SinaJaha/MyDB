@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import ToDoList, Item
 from .forms import CreateNewList
+from django.contrib.auth.decorators import login_required
 
 
 
-
+@login_required(login_url="/login/")
 def index(response, id):
     try: 
         ls = ToDoList.objects.get(id=id)
@@ -35,6 +36,7 @@ def index(response, id):
 def home(response):
     return render(response, "main/home.html", {})
 
+@login_required(login_url="/login/")
 def create(response):
     if response.method == "POST":
         form = CreateNewList(response.POST)
@@ -52,7 +54,7 @@ def create(response):
 
 
 
-    
+@login_required(login_url="/login/")
 def showAll(response):
     
     return render(response, "main/all.html", {"lists": ToDoList.objects.all()})

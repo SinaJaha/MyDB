@@ -8,6 +8,7 @@
 <form method="POST" action="#">
     {% csrf_token %}
     
+
     {% for item in ls.item_set.all %}
     <div class="input-group mb-3">
         <div class="input-group-text">
@@ -17,7 +18,7 @@
                 <input class="form-check-input mt-0" type="checkbox", value="clicked", name="c{{item.id}}">
             {% endif %} 
         </div>
-    <input type="text" value="{{item.text}}" class="form-control">
+        <input type="text" value="{{item.text}}" class="form-control">
     </div>
     {% endfor %}
 
