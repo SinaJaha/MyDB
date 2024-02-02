@@ -3,11 +3,15 @@
 {% block title %}View List{% endblock %}
 {% block header %} {{ls.name}} {% endblock %}
 
+
+
 {% block content %}
+
+
 
 <form method="POST" action="#">
     {% csrf_token %}
-    
+   
 
     {% for item in ls.item_set.all %}
     <div class="input-group mb-3">
@@ -17,16 +21,30 @@
             {% else %}
                 <input class="form-check-input mt-0" type="checkbox", value="clicked", name="c{{item.id}}">
             {% endif %} 
+            
         </div>
         <input type="text" value="{{item.text}}" class="form-control">
+        <div class = "input-group-append">
+            <input class="form-check-input mt-2" type="checkbox", value="delete", name="d{{item.id}}">
+        </div>
+
     </div>
     {% endfor %}
 
-    <div class="input-group input-group-lg mb-3">
-    <input type="text" name="newItemText" placeholder="New Item" class="input-group-text" />
-    <button type="submit" name="newItem" value="newItem" class="btn btn-secondary">New Item</button>
-    </div>
-    <button type="submit" name="save" value="save" class="btn btn-primary">Save</button>
+    <div class="d-flex justify-content-between bd-highlight mb-3">
+        <input type="text" name="newItemText" placeholder="New Item" class="input-group-text" />
+        <button type="submit" name="save" value="save" class="btn btn-primary">Save</button>
+        <button type="submit" name="delete" value="delete" class="btn btn-secondary">Delete marked</button>
+      </div>
+
+
+
+        
+        
+    
+    
+    <br><br><br><br><br>
+    <button type="submit" name="deleteTable" value="deleteTable" class="btn btn-danger">DELETE LIST</button>
 </form>
 
 

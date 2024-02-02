@@ -6,8 +6,7 @@
 
 {% block content %}
 
-<ul>
-    {% for ls in lists %}
+    {% for ls in user.todolist.all %}
     <div class="input-group mb-3">
         <a href="/{{ls.id}}" class="link-dark link-underline-opacity-10 link-underline-opacity-100-hover">{{ls.name}}</a>
     </div>

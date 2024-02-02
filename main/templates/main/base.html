@@ -10,47 +10,27 @@
         body {
           background-color: #eeeef7;
         }
-
-
-        @media (min-width: 991.98px) {
-        .main {
-            padding-left: 240px;
-        }
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 58px 0 0; /* Height of navbar */
-            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-            width: 240px;
-            z-index: 600;
-        }
-
-        @media (max-width: 991.98px) {
-        .sidebar {
-            width: 100%;
-        }
-        }
-        .sidebar .active {
-        border-radius: 5px;
-        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-        }
-
-        .sidebar-sticky {
-        position: relative;
-        top: 0;
-        height: calc(100vh - 48px);
-        padding-top: 0.5rem;
-        overflow-x: hidden;
-        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-        }
+  
         /* Navbar */
         .navbar {
             box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+        }
+
+        .dropdown-menu li {
+        position: relative;
+        }
+        .dropdown-menu .dropdown-submenu {
+        display: none;
+        position: absolute;
+        right: 100%;
+        top: -7px;
+        }
+        .dropdown-menu .dropdown-submenu-left {
+        right: auto;
+        left: 100%;
+        }
+        .dropdown-menu > li:hover > .dropdown-submenu {
+        display: block;
         }
     </style>
 
@@ -64,13 +44,13 @@
 <body>  
 <!--Main Navigation-->
     
-    <!-- add sidebar-->
-        {% include 'main/sidebar.html' %}
+    <!-- add sidebar -->
+        
   
   
     <!-- Navbar -->
     <header>
-        <nav id="main-navbar" class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <nav id="main-navbar" class="navbar navbar-expand-sm bg-body-tertiary fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <img
@@ -86,39 +66,54 @@
               </button>
               
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                  </li>
+                
+                  {% if user.is_authenticated %}
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
+                      My tables
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="/create">Create table</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item disabled" href="#">My tables</a></li>
+                      {% for ls in user.todolist.all %}
+                      <li><a class="dropdown-item" href="/{{ls.id}}">{{ls.name}}</a></li>
+                      {% endfor %}
                     </ul>
                   </li>
+
+                  {% endif %}
                   <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                   </li>
                 </ul>
                 <ul class="navbar-nav me-right mb-3 mb-lg-0">
                   {% if user.is_authenticated %}
-                  <li><a class="nav-link disabled" aria-disabled="true">Hello {{ user.username }}</a></li>
-                  <li><a href="/logout" class="btn btn-outline-primary" role="button">Log out</a></li>
+                  
+          
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{user.username}}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" href="#">My profile</a></li>
+                      <li><a class="dropdown-item" href="#">Settings</a></li>
+
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a href="/logout" class="dropdown-item btn btn-default">Log out</a></li>
+                    </ul>
+                  </li>
+
                 {% else %}
                 <a href="/login" class="btn btn-primary" role="button">Login</a>
                 {% endif %}
                 </ul>
-                <form class="d-flex" role="search">
-                 
-                </form>
+              
               </div>
             </div>
           </nav>
@@ -131,7 +126,7 @@
     <!--Main layout-->
     <div id="content" name="content" class="main" style="margin-top: 58px;">
         <div class="row justify-content-center">
-            <div class="col-5">
+            <div class="col-8">
                 <h1 class="mt-2">{% block header %}No header{% endblock %}</h1>
                 <hr class="mt-0 mb-4">
                 {% block content %}Default{% endblock %}
