@@ -12,8 +12,9 @@
 <ul>
   <li>Login with the use of the authlib library</li>
   <li>Adding the models for new coloumns with name and datatype. Adding the model for data. This will make it possible for the user to make tables with new personalized coloumns,
-  where they can choose their preferred datatype for each coloumn themselves. </li>
-  <li>Example for a new database structure: ![img](https://github.com/SinaJaha/django-program/assets/111735256/9a186d62-aaa7-42a3-a652-c904d1a5530e)
-</li>
+  where they can choose their preferred datatype for each coloumn themselves. \n Example for a new database structure: </li>
+  <img   width="450" height="220" src="https://github.com/SinaJaha/django-program/assets/111735256/9a186d62-aaa7-42a3-a652-c904d1a5530e">
+  <li>Migrating to postgreSQL</li>
+
 
 </ul>
